@@ -1,66 +1,35 @@
-var helicopterIMG, helicopterSprite, packageSprite,packageIMG;
-var packageBody,ground
+//TANISHQ
 const Engine = Matter.Engine;
-const World = Matter.World;
+const World= Matter.World;
 const Bodies = Matter.Bodies;
-const Body = Matter.Body;
+//YOUR PROGRAMS VARS
+var engine, world;
+var object;
+var ground;
+var b1, b2,b3;
+function setup(){
+    createCanvas(400,400);//DEFAULT
+    engine = Engine.create();//engine = Matter.Engine.create(); DEFAULT
+    world = engine.world;//DEFAULT
+    //CREATING YOUR BODIES
 
-function preload()
-{
-	helicopterIMG=loadImage("helicopter.png")
-	packageIMG=loadImage("package.png")
+ground = new Ground (200,390,400,20)
+b1 = new Box(100,200,30,40)
+b2 = new Box (200,200,40,30)
+b3 = new Box (150,200,40,30)
+
+    console.log(object);
 }
 
-function setup() {
-	createCanvas(800, 700);
-	rectMode(CENTER);
-	
-
-	packageSprite=createSprite(width/2, 80, 10,10);
-	packageSprite.addImage(packageIMG)
-	packageSprite.scale=0.2
-
-	helicopterSprite=createSprite(width/2, 200, 10,10);
-	helicopterSprite.addImage(helicopterIMG)
-	helicopterSprite.scale=0.6
-
-	groundSprite=createSprite(width/2, height-35, width,10);
-	groundSprite.shapeColor=color(255)
-
-
-	engine = Engine.create();
-	world = engine.world;
-
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:3, isStatic:true});
-	World.add(world, packageBody);
-	
-
-	//Create a Ground
-	ground = Bodies.rectangle(width/2, 650, width, 10 , {isStatic:true} );
- 	World.add(world, ground);
-
-
-	Engine.run(engine);
+function draw(){
+    background(0);
+    Engine.update(engine);
+    rectMode(CENTER);
   
+   
+    b1.display();
+    b2.display();
+    b3.display();
+    ground.display();
 }
-
-
-function draw() {
-  rectMode(CENTER);
-  background(0);
-  packageSprite.x= packageBody.position.x 
-  packageSprite.y= packageBody.position.y 
-  drawSprites();
- 
-}
-
-function keyPressed() {
- if (keyCode === DOWN_ARROW) {
-    // Look at the hints in the document and understand how to make the package body fall only on press of the Down arrow key.
-
-    
-  }
-}
-
-
 
